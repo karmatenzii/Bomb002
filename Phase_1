@@ -1,0 +1,45 @@
+(gdb) b phase_1
+Breakpoint 1 at 0x400e8d
+(gdb) run
+Starting program: /mnt/c/Semester 5/Computer system 1/Assignment1/Assignment 1/bomb002/bomb
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+hello
+
+Breakpoint 1, 0x0000000000400e8d in phase_1 ()
+(gdb) disas
+Dump of assembler code for function phase_1:
+=> 0x0000000000400e8d <+0>:     sub    $0x8,%rsp
+   0x0000000000400e91 <+4>:     mov    $0x4023cc,%esi
+   0x0000000000400e96 <+9>:     callq  0x401339 <strings_not_equal>// from here i knew that the answer of thsi phase is in string.
+   0x0000000000400e9b <+14>:    test   %eax,%eax
+   0x0000000000400e9d <+16>:    je     0x400ea4 <phase_1+23>
+   0x0000000000400e9f <+18>:    callq  0x401438 <explode_bomb>
+   0x0000000000400ea4 <+23>:    add    $0x8,%rsp
+   0x0000000000400ea8 <+27>:    retq
+End of assembler dump.
+(gdb) x/s 0x4023cc // Therefore I checked what is in this address, and found the string. 
+0x4023cc:       "Public speaking is very easy."
+(gdb) run
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /mnt/c/Semester 5/Computer system 1/Assignment1/Assignment 1/bomb002/bomb
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Public speaking is very easy.
+
+Breakpoint 1, 0x0000000000400e8d in phase_1 ()
+(gdb) disas
+Dump of assembler code for function phase_1:
+=> 0x0000000000400e8d <+0>:     sub    $0x8,%rsp
+   0x0000000000400e91 <+4>:     mov    $0x4023cc,%esi
+   0x0000000000400e96 <+9>:     callq  0x401339 <strings_not_equal>
+   0x0000000000400e9b <+14>:    test   %eax,%eax
+   0x0000000000400e9d <+16>:    je     0x400ea4 <phase_1+23>
+   0x0000000000400e9f <+18>:    callq  0x401438 <explode_bomb>
+   0x0000000000400ea4 <+23>:    add    $0x8,%rsp
+   0x0000000000400ea8 <+27>:    retq
+End of assembler dump.
+(gdb) u*0x0000000000400ea8
+main (argc=<optimized out>, argv=<optimized out>) at bomb.c:75
+75          phase_defused(); // Finally the bomb is defused.             
