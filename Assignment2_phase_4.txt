@@ -10,14 +10,14 @@ Dump of assembler code for function phase_4:
    0x0000000000401020 <+18>:    xor    %eax,%eax
    0x0000000000401022 <+20>:    mov    %rsp,%rcx
    0x0000000000401025 <+23>:    lea    0x4(%rsp),%rdx
-   0x000000000040102a <+28>:    mov    $0x4025b7,%esi                            //read the input formate,it accept "%d,%d"
-   0x000000000040102f <+33>:    callq  0x400bb0 <__isoc99_sscanf@plt>            // I have given 1 3 as my input
-   0x0000000000401034 <+38>:    cmp    $0x2,%eax                                 //compare 2 with %eax and eax = 2:
-   0x0000000000401037 <+41>:    jne    0x401044 <phase_4+54>                     // if it is not equal, it will explode the bomb:
-   0x0000000000401039 <+43>:    mov    (%rsp),%eax                               //  % rsp, contain the second term of a USER INPUT:
-   0x000000000040103c <+46>:    sub    $0x2,%eax                                 // 2 is subtracted from %eax, now eax = 0;
-   0x000000000040103f <+49>:    cmp    $0x2,%eax                                 // 2 is compared with eax, that is 0
-   0x0000000000401042 <+52>:    jbe    0x401049 <phase_4+59>                     // since 0 is less then 2 , it will jump to +59 address; from here we will get our second term;
+   0x000000000040102a <+28>:    mov    $0x4025b7,%esi                            //Reads user input formats,accepts two integers"%d,%d"
+   0x000000000040102f <+33>:    callq  0x400bb0 <__isoc99_sscanf@plt> 
+   0x0000000000401034 <+38>:    cmp    $0x2,%eax                                 //0x2 = 2, compare 2 with %eax and eax = 2.
+   0x0000000000401037 <+41>:    jne    0x401044 <phase_4+54>                     // if 2!= %eax,it will explode the bomb, else jump to net line
+   0x0000000000401039 <+43>:    mov    (%rsp),%eax                               // INPUTS are check in reverse oreder, value of rsp is stored at eax: 
+   0x000000000040103c <+46>:    sub    $0x2,%eax                                 // 2 is subtracted from %eax, now eax = 1;
+   0x000000000040103f <+49>:    cmp    $0x2,%eax                                 // 2 is compared with value of eax, eax = 1;
+   0x0000000000401042 <+52>:    jbe    0x401049 <phase_4+59>                     // since  1 < 2 , it will jump to +59 address, SECOND TERM IS ACCEPTED;
    0x0000000000401044 <+54>:    callq  0x401438 <explode_bomb>
    0x0000000000401049 <+59>:    mov    (%rsp),%esi                               //  value of (%rsp) is stored at %esi;
    0x000000000040104c <+62>:    mov    $0x5,%edi                                 // 5 is stored at %edi;
@@ -168,10 +168,10 @@ Dump of assembler code for function phase_4:
    0x0000000000401049 <+59>:    mov    (%rsp),%esi
    0x000000000040104c <+62>:    mov    $0x5,%edi
    0x0000000000401051 <+67>:    callq  0x400fd3 <func4>
-=> 0x0000000000401056 <+72>:    cmp    0x4(%rsp),%eax                                     // COMPARE THE FIRST TERM WITH THE VALUE OF %eax: eax = 24 is compared with our first term that is 1;
+=> 0x0000000000401056 <+72>:    cmp    0x4(%rsp),%eax                                     // compared the value of %eax: eax = 36 is compared with our first term that is 1;
    0x000000000040105a <+76>:    je     0x401061 <phase_4+83>
-   0x000000000040105c <+78>:    callq  0x401438 <explode_bomb>                            // SINCE IT IS NOT EQUAL IT WILL EXPLODE THE BOMB, THERE FOR THE ANSWER WILL BE  24 ADN 2; lets try:
-   0x0000000000401061 <+83>:    mov    0x8(%rsp),%rax
+   0x000000000040105c <+78>:    callq  0x401438 <explode_bomb>                            // since it is equal it will escape the bomb, it will escape the bomb,:
+   0x0000000000401061 <+83>:    mov    0x8(%rsp),%rax                                     // therefore the answer is 36 and 3;
    0x0000000000401066 <+88>:    xor    %fs:0x28,%rax
    0x000000000040106f <+97>:    je     0x401076 <phase_4+104>
    0x0000000000401071 <+99>:    callq  0x400b00 <__stack_chk_fail@plt>
