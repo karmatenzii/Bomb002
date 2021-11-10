@@ -10,15 +10,15 @@ Dump of assembler code for function phase_5:
    0x000000000040108d <+18>:    xor    %eax,%eax
    0x000000000040108f <+20>:    lea    0x4(%rsp),%rcx
    0x0000000000401094 <+25>:    mov    %rsp,%rdx
-   0x0000000000401097 <+28>:    mov    $0x4025b7,%esi                            // INPUT FORMATE , it accept "%d,%d"
+   0x0000000000401097 <+28>:    mov    $0x4025b7,%esi                            // Reads input formate, it accept "%d,%d"
    0x000000000040109c <+33>:    callq  0x400bb0 <__isoc99_sscanf@plt>
-   0x00000000004010a1 <+38>:    cmp    $0x1,%eax                                 // COMPARE 1 WITH THE VALUE OF %eax that is 2:
-   0x00000000004010a4 <+41>:    jg     0x4010ab <phase_5+48>                     //  SINCE 2 IS GREATER THAN 1 , IT  WILL ESCAPE THE EXPLODE BOMB
+   0x00000000004010a1 <+38>:    cmp    $0x1,%eax                                 // compare 1 with the value of  %eax; eax = 2:
+   0x00000000004010a4 <+41>:    jg     0x4010ab <phase_5+48>                     //  since 2>1 , it  will jump to +48 address;
    0x00000000004010a6 <+43>:    callq  0x401438 <explode_bomb>
-   0x00000000004010ab <+48>:    mov    (%rsp),%eax                               // (%rsp) STORE A USER iNPUT, WHICH IS BEING STORED AT %eax;
-   0x00000000004010ae <+51>:    and    $0xf,%eax                                 // AND OPERATION IS PERFORMED ,we get
+   0x00000000004010ab <+48>:    mov    (%rsp),%eax                               // (%rsp) store first term,  value of (%rsp) is stored at %eax;
+   0x00000000004010ae <+51>:    and    $0xf,%eax                                 // performed AND operation, we get
    0x00000000004010b1 <+54>:    mov    %eax,(%rsp)                               // 0fx = 15 , 15 is being compared with 1
-   0x00000000004010b4 <+57>:    cmp    $0xf,%eax                                 
+   0x00000000004010b4 <+57>:    cmp    $0xf,%eax                                 // if(15 == value of eax, it will jump to +109;
    0x00000000004010b7 <+60>:    je     0x4010e8 <phase_5+109>                    //  since it is not equal it will escape the explod bomb
    0x00000000004010b9 <+62>:    mov    $0x0,%ecx                                 // 0 is moved at %ecx
    0x00000000004010be <+67>:    mov    $0x0,%edx                                 // 0 is moved at %edx
@@ -26,7 +26,7 @@ Dump of assembler code for function phase_5:
    0x00000000004010c6 <+75>:    cltq
    0x00000000004010c8 <+77>:    mov    0x402440(,%rax,4),%eax
    0x00000000004010cf <+84>:    add    %eax,%ecx                                 // value of eax is moved at %ecx;
-   0x00000000004010d1 <+86>:    cmp    $0xf,%eax                                 // compare 15 and value of eax;
+   0x00000000004010d1 <+86>:    cmp    $0xf,%eax                                 // compare 15 with the value of eax;
    0x00000000004010d4 <+89>:    jne    0x4010c3 <phase_5+72>                     // jump at  +72 ,untill the value of  eax is equal to 15, then it will jump to next line
    0x00000000004010d6 <+91>:    movl   $0xf,(%rsp)                               // 15 is moved  at rsp, %rsp = 15
    0x00000000004010dd <+98>:    cmp    $0xf,%edx                                 // i5 is  compare  with rdx,      
@@ -268,4 +268,4 @@ Dump of assembler code for function phase_5:
 End of assembler dump.
 (gdb) u*0x0000000000401106
 main (argc=<optimized out>, argv=<optimized out>) at bomb.c:102
-102         phase_defused();                                                    // OUR FIRST INPUT MUST BE 5 AND 115 , IT WILL DEFUSE THE PHASE 5:
+102         phase_defused();                                                    // our input must be 5 and 115  , phase_5 is defused;
